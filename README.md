@@ -1,8 +1,21 @@
 # Spring-Boot-nGrinder
 >nGrinder is a platform for stress tests that enables you to execute script creation, test execution, monitoring, and result report generator simultaneously. The open-source nGrinder offers easy ways to conduct stress tests by eliminating inconveniences and providing integrated environments."
 
+## Overview
 [nGrinder](https://github.com/naver/ngrinder)는 네이버에서 제작한 오픈소스 프로젝트로 **서버의 부하 테스트를 위한 도구**입니다.
+
+스크립트 생성과 테스트,모니터링 등 성능 지표에 대한 보고서를 Web UI를 통해 사용할 수 있습니다.
 ![nGrindSystemArchitecture](https://user-images.githubusercontent.com/79642391/188143168-f9ec6397-882f-406b-8b41-460695f3edd8.png)
+
+nGrinder를 사용하기 위해선 `Controller`,`Agent`,`Target Server`가 각각 별도의 서버로 구성되어야 합니다.
+
+한 서버에 Controller, Agent, Target Server가 몰려있다면 서버의 자원을 나누어서 사용해야 하고, 그만큼 Context Switching이 발생하여 순수 성능을 끌어올릴 수 없기 때문입니다.
+
+`Controller`는 Web UI를 제공하고 테스트를 구성할 수 있도록 하며, 테스트를 모니터링 하거나 보고서를 시각화 해주는 역할을 합니다.
+
+`Agent`는 부하를 발생시키는 역할로 Process와 Thread를 이용하여 vUser(가상 사용자)를 생성합니다. Controller에서 생성한 테스트 스크립트에 의해 Target Server에 부하를 발생시킵니다.
+
+`Target Server`는 테스트하고자 하는 서버를 의미합니다. 테스트 중 발생한 오류나 CPU, Memory의 점유율 등을 확인하고 싶다면 nGrinder Monitor를 설치할 수 있습니다.
 
 ## Environment
 * Spring Boot
